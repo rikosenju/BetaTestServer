@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Life - Services</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="nav-menu">
+            <li><a href="../Home/index.html">Home</a></li>
+            <li><a href="../About/index.html">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="../Chats/index.html">Chats</a></li>
+            <li><a href="../Resources/index.html">Resources</a></li>
+            <li><a href="../Resources/Inventory/index.html">Inventory</a></li>
+            <li><a href="../Resources/Trade/index.html">Trade</a></li>
+            <li><a href="../Login&Create/index.html">Log Out</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h1>Our Services</h1>
+        <p>At Eco Life, we offer a range of services designed to help you live sustainably and enjoy eco-friendly entertainment. From game development to environmental consulting, we're here to support your green initiatives.</p>
+
+        <p>Explore our services including custom game design, sustainability workshops, and community outreach programs. Contact us to learn more about how we can assist you in making a positive impact.</p>
+    </div>
+
+    <div class="annoucement">
+        <marquee behavior="scroll" direction="left">🌿 Join our Eco Life community today and start your journey towards a sustainable lifestyle! 🌍</marquee>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

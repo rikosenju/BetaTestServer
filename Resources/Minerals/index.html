@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Life - Minerals</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="nav-menu">
+            <li><a href="../../Home/index.html">Home</a></li>
+            <li><a href="../../About/index.html">About</a></li>
+            <li><a href="../../Services/index.html">Services</a></li>
+            <li><a href="../../Chats/index.html">Chats</a></li>
+            <li><a href="../index.html">Resources</a></li>
+            <li><a href="../Inventory/index.html">Inventory</a></li>
+            <li><a href="../Trade/index.html">Trade</a></li>
+            <li><a href="../../Login&Create/index.html">Log Out</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <button class="back-button" onclick="window.location.href='../index.html'">Back to Resources</button>
+        <h1>Minerals</h1>
+        <p>Explore different minerals available in the game:</p>
+
+        <div class="resource-options">
+            <div class="resource-card" onclick="window.location.href='Gold/index.html'">
+                <h2>Gold</h2>
+                <p>Precious metal for crafting and trading.</p>
+            </div>
+
+            <div class="resource-card" onclick="window.location.href='Crystal/index.html'">
+                <h2>Crystal</h2>
+                <p>Magical crystals with special properties.</p>
+            </div>
+
+            <div class="resource-card" onclick="window.location.href='Iron/index.html'">
+                <h2>Iron</h2>
+                <p>Strong metal for building structures.</p>
+            </div>
+
+            <div class="resource-card" onclick="window.location.href='Diamond/index.html'">
+                <h2>Diamond</h2>
+                <p>Rarest gem for high-value items.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="annoucement">
+        <marquee behavior="scroll" direction="left">🌿 Join our Eco Life community today and start your journey towards a sustainable lifestyle! 🌍</marquee>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

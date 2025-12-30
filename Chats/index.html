@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Life - Chats</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="nav-menu">
+            <li><a href="../Home/index.html">Home</a></li>
+            <li><a href="../About/index.html">About</a></li>
+            <li><a href="../Services/index.html">Services</a></li>
+            <li><a href="#">Chats</a></li>
+            <li><a href="../Resources/index.html">Resources</a></li>
+            <li><a href="../Resources/Inventory/index.html">Inventory</a></li>
+            <li><a href="../Resources/Trade/index.html">Trade</a></li>
+            <li><a href="../Login&Create/index.html">Log Out</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h1>Chats</h1>
+        <p>Join our community chats to discuss sustainable living, share tips, and connect with like-minded individuals. Start a conversation below!</p>
+
+        <div id="chat-container">
+            <div id="chat-messages"></div>
+            <input type="text" id="chat-input" placeholder="Type your message...">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <div class="annoucement">
+        <marquee behavior="scroll" direction="left">🌿 Join our Eco Life community today and start your journey towards a sustainable lifestyle! 🌍</marquee>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Simple chat functionality
+        const chatInput = document.getElementById('chat-input');
+        const sendButton = document.getElementById('send-button');
+        const chatMessages = document.getElementById('chat-messages');
+
+        sendButton.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (message) {
+                const messageElement = document.createElement('div');
+                messageElement.textContent = `You: ${message}`;
+                messageElement.style.marginBottom = '10px';
+                chatMessages.appendChild(messageElement);
+                chatInput.value = '';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>

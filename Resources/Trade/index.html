@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Life - Trade</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="nav-menu">
+            <li><a href="../../Home/index.html">Home</a></li>
+            <li><a href="../../About/index.html">About</a></li>
+            <li><a href="../../Services/index.html">Services</a></li>
+            <li><a href="../../Chats/index.html">Chats</a></li>
+            <li><a href="../index.html">Resources</a></li>
+            <li><a href="../Inventory/index.html">Inventory</a></li>
+            <li><a href="#">Trade</a></li>
+            <li><a href="../../Login&Create/index.html">Log Out</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <button class="back-button" onclick="window.location.href='../index.html'">Back to Resources</button>
+        <h1>Trade Center</h1>
+        <p>Post items for trade or make offers on existing posts.</p>
+
+        <div class="post-trade">
+            <h2>Post a Trade</h2>
+            <select id="item-select">
+                <option value="">Select Item</option>
+            </select>
+            <input type="text" id="desired-item" placeholder="Desired Item">
+            <button id="post-trade-btn">Post Trade</button>
+        </div>
+
+        <div class="trade-list">
+            <h2>Available Trades</h2>
+            <div id="trades-container">
+                <!-- Trades will be listed here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="annoucement">
+        <marquee behavior="scroll" direction="left">🌿 Join our Eco Life community today and start your journey towards a sustainable lifestyle! 🌍</marquee>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Load inventory for select
+        function loadInventorySelect() {
+            const inventory = JSON.parse(localStorage.getItem('inventory')) || {};
+            const select = document.getElementById('item-select');
+            select.innerHTML = '<option value="">Select Item</option>';
+            for (const [item, count] of Object.entries(inventory)) {
+                if (count > 0) {
+                    const option = document.createElement('option');
+                    option.value = item;
+                    option.textContent = `${item} (${count})`;
+                    select.appendChild(option);
+                }
+            }
+        }
+
+        // Post trade
+        document.getElementById('post-trade-btn').addEventListener('click', () => {
+            const item = document.getElementById('item-select').value;
+            const desired = document.getElementById('desired-item').value.trim();
+            if (item && desired) {
+                const trades = JSON.parse(localStorage.getItem('trades')) || [];
+                trades.push({ id: Date.now(), item, desired, poster: 'You' });
+                localStorage.setItem('trades', JSON.stringify(trades));
+                loadTrades();
+                loadInventorySelect();
+                document.getElementById('desired-item').value = '';
+            } else {
+                alert('Please select an item and enter desired item.');
+            }
+        });
+
+        // Load trades
+        function loadTrades() {
+            const trades = JSON.parse(localStorage.getItem('trades')) || [];
+            const container = document.getElementById('trades-container');
+            container.innerHTML = '';
+            trades.forEach(trade => {
+                const tradeDiv = document.createElement('div');
+                tradeDiv.className = 'trade-post';
+                tradeDiv.innerHTML = `
+                    <p><strong>${trade.poster}</strong> wants to trade <strong>${trade.item}</strong> for <strong>${trade.desired}</strong></p>
+                    <button onclick="makeOffer(${trade.id})">Make Offer</button>
+                `;
+                container.appendChild(tradeDiv);
+            });
+        }
+
+        // Make offer
+        function makeOffer(tradeId) {
+            const offer = prompt('What do you offer?');
+            if (offer) {
+                alert(`Offer sent: ${offer}`);
+                // In a real app, this would send to server
+            }
+        }
+
+        // Initial load
+        loadInventorySelect();
+        loadTrades();
+    </script>
+</body>
+</html>

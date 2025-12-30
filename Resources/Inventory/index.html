@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Life - Inventory</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="nav-menu">
+            <li><a href="../../Home/index.html">Home</a></li>
+            <li><a href="../../About/index.html">About</a></li>
+            <li><a href="../../Services/index.html">Services</a></li>
+            <li><a href="../../Chats/index.html">Chats</a></li>
+            <li><a href="../index.html">Resources</a></li>
+            <li><a href="#">Inventory</a></li>
+            <li><a href="../Trade/index.html">Trade</a></li>
+            <li><a href="../../Login&Create/index.html">Log Out</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <button class="back-button" onclick="window.location.href='../index.html'">Back to Resources</button>
+        <h1>Your Inventory</h1>
+        <div id="inventory-list">
+            <!-- Items will be displayed here -->
+        </div>
+    </div>
+
+    <div class="annoucement">
+        <marquee behavior="scroll" direction="left">🌿 Join our Eco Life community today and start your journey towards a sustainable lifestyle! 🌍</marquee>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Load inventory
+        function loadInventory() {
+            const inventory = JSON.parse(localStorage.getItem('inventory')) || {};
+            const inventoryList = document.getElementById('inventory-list');
+            inventoryList.innerHTML = '';
+            if (Object.keys(inventory).length === 0) {
+                inventoryList.innerHTML = '<p>Your inventory is empty.</p>';
+            } else {
+                for (const [item, count] of Object.entries(inventory)) {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'item';
+                    itemDiv.innerHTML = `
+                        <img src="placeholder.png" alt="${item}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkltYWdlPC90ZXh0Pjwvc3ZnPg=='">
+                        <p>${item}: ${count}</p>
+                    `;
+                    inventoryList.appendChild(itemDiv);
+                }
+            }
+        }
+
+        loadInventory();
+    </script>
+</body>
+</html>

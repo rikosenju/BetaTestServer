@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Life - About</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="nav-menu">
+            <li><a href="../Home/index.html">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="../Services/index.html">Services</a></li>
+            <li><a href="../Chats/index.html">Chats</a></li>
+            <li><a href="../Resources/index.html">Resources</a></li>
+            <li><a href="../Resources/Inventory/index.html">Inventory</a></li>
+            <li><a href="../Resources/Trade/index.html">Trade</a></li>
+            <li><a href="../Login&Create/index.html">Log Out</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h1>About Eco Life</h1>
+        <p>Eco Life is dedicated to promoting sustainable living and environmental awareness through innovative games and solutions. Our mission is to inspire individuals and communities to make eco-friendly choices that benefit the planet.</p>
+
+        <p>Founded in 2023, Eco Life combines entertainment with education, offering immersive experiences that teach the importance of balancing economic growth with environmental stewardship. Join us in our journey towards a greener future.</p>
+    </div>
+
+    <div class="annoucement">
+        <marquee behavior="scroll" direction="left">🌿 Join our Eco Life community today and start your journey towards a sustainable lifestyle! 🌍</marquee>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

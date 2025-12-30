@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Life - Log Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="nav-menu">
+            <li><a href="../../Home/index.html">Home</a></li>
+            <li><a href="../../About/index.html">About</a></li>
+            <li><a href="../../Services/index.html">Services</a></li>
+            <li><a href="../../Chats/index.html">Chats</a></li>
+            <li><a href="../index.html">Resources</a></li>
+            <li><a href="../Inventory/index.html">Inventory</a></li>
+            <li><a href="../Trade/index.html">Trade</a></li>
+            <li><a href="../../Login&Create/index.html">Log Out</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <button class="back-button" onclick="window.location.href='../index.html'">Back to Resources</button>
+        <h1>Log Cutting Game</h1>
+        <p>Hire workers to cut logs and build your resources!</p>
+
+        <div id="game-stats">
+            <p>Logs: <span id="logs-count">0</span></p>
+            <p>Coins: <span id="coins-count">0</span></p>
+            <p>Workers: <span id="workers-count">0</span></p>
+        </div>
+
+        <button id="hire-worker">Hire Worker (Cost: 100 Coins)</button>
+
+        <div id="workers-list">
+            <!-- Workers will be listed here -->
+        </div>
+    </div>
+
+    <div class="annoucement">
+        <marquee behavior="scroll" direction="left">🌿 Join our Eco Life community today and start your journey towards a sustainable lifestyle! 🌍</marquee>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Game variables
+        // Set initial coins only if not set
+        if (!localStorage.getItem('coins')) {
+            localStorage.setItem('coins', 200);
+        }
+        let logs = parseInt(localStorage.getItem('logs')) || 0;
+        let coins = parseInt(localStorage.getItem('coins'));
+        let workers = parseInt(localStorage.getItem('workers')) || 0;
+        let lastUpdate = parseInt(localStorage.getItem('lastUpdate')) || Date.now();
+        const hireWorkerBtn = document.getElementById('hire-worker');
+        const logsCount = document.getElementById('logs-count');
+        const coinsCount = document.getElementById('coins-count');
+        const workersCount = document.getElementById('workers-count');
+        const workersList = document.getElementById('workers-list');
+
+        // Calculate offline progress
+        const now = Date.now();
+        const timeDiff = (now - lastUpdate) / 1000; // seconds
+        if (workers > 0 && timeDiff > 0) {
+            logs += Math.floor(workers * timeDiff);
+        }
+        lastUpdate = now;
+
+        // Update display
+        function updateDisplay() {
+            logsCount.textContent = logs;
+            coinsCount.textContent = coins;
+            workersCount.textContent = workers;
+            localStorage.setItem('logs', logs);
+            localStorage.setItem('coins', coins);
+            localStorage.setItem('workers', workers);
+            localStorage.setItem('lastUpdate', lastUpdate);
+            // Update inventory
+            const inventory = JSON.parse(localStorage.getItem('inventory')) || {};
+            inventory['Logs'] = logs;
+            inventory['Coins'] = coins;
+            localStorage.setItem('inventory', JSON.stringify(inventory));
+        }
+
+        // Hire worker
+        hireWorkerBtn.addEventListener('click', () => {
+            if (coins >= 100) {
+                coins -= 100;
+                workers++;
+                updateDisplay();
+                addWorkerToList();
+            } else {
+                alert('Not enough coins to hire a worker!');
+            }
+        });
+
+        // Add worker to list
+        function addWorkerToList() {
+            const workerDiv = document.createElement('div');
+            workerDiv.textContent = `Worker ${workers} is cutting logs...`;
+            workersList.appendChild(workerDiv);
+        }
+
+        // Generate logs
+        setInterval(() => {
+            if (workers > 0) {
+                logs += workers;
+                lastUpdate = Date.now();
+                updateDisplay();
+            }
+        }, 1000); // Every second
+
+        // Initial display
+        updateDisplay();
+        for (let i = 0; i < workers; i++) {
+            addWorkerToList();
+        }
+    </script>
+</body>
+</html>

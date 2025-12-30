@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Life - Crystal Mining</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="nav-menu">
+            <li><a href="../../../Home/index.html">Home</a></li>
+            <li><a href="../../../About/index.html">About</a></li>
+            <li><a href="../../../Services/index.html">Services</a></li>
+            <li><a href="../../../Chats/index.html">Chats</a></li>
+            <li><a href="../../index.html">Resources</a></li>
+            <li><a href="../../Inventory/index.html">Inventory</a></li>
+            <li><a href="../../Trade/index.html">Trade</a></li>
+            <li><a href="../../../Login&Create/index.html">Log Out</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <button class="back-button" onclick="window.location.href='../index.html'">Back to Minerals</button>
+        <h1>Crystal Mining Game</h1>
+        <p>Hire miners to extract crystals and build your resources!</p>
+
+        <div id="game-stats">
+            <p>Crystal: <span id="crystal-count">0</span></p>
+            <p>Coins: <span id="coins-count">0</span></p>
+            <p>Miners: <span id="miners-count">0</span></p>
+        </div>
+
+        <button id="hire-miner">Hire Miner (Cost: 100 Coins)</button>
+
+        <div id="miners-list">
+            <!-- Miners will be listed here -->
+        </div>
+    </div>
+
+    <div class="annoucement">
+        <marquee behavior="scroll" direction="left">🌿 Join our Eco Life community today and start your journey towards a sustainable lifestyle! 🌍</marquee>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Game variables
+        let crystal = parseInt(localStorage.getItem('crystal')) || 0;
+        let coins = parseInt(localStorage.getItem('coins')) || 0;
+        let miners = parseInt(localStorage.getItem('crystalMiners')) || 0;
+        let lastUpdate = parseInt(localStorage.getItem('crystalLastUpdate')) || Date.now();
+        const hireMinerBtn = document.getElementById('hire-miner');
+        const crystalCount = document.getElementById('crystal-count');
+        const coinsCount = document.getElementById('coins-count');
+        const minersCount = document.getElementById('miners-count');
+        const minersList = document.getElementById('miners-list');
+
+        // Calculate offline progress
+        const now = Date.now();
+        const timeDiff = (now - lastUpdate) / 1000;
+        if (miners > 0 && timeDiff > 0) {
+            crystal += Math.floor(miners * timeDiff);
+        }
+        lastUpdate = now;
+
+        // Update display
+        function updateDisplay() {
+            crystalCount.textContent = crystal;
+            coinsCount.textContent = coins;
+            minersCount.textContent = miners;
+            localStorage.setItem('crystal', crystal);
+            localStorage.setItem('coins', coins);
+            localStorage.setItem('crystalMiners', miners);
+            localStorage.setItem('crystalLastUpdate', lastUpdate);
+            // Update inventory
+            const inventory = JSON.parse(localStorage.getItem('inventory')) || {};
+            inventory['Crystal'] = crystal;
+            inventory['Coins'] = coins;
+            localStorage.setItem('inventory', JSON.stringify(inventory));
+        }
+
+        // Hire miner
+        hireMinerBtn.addEventListener('click', () => {
+            if (coins >= 100) {
+                coins -= 100;
+                miners++;
+                updateDisplay();
+                addMinerToList();
+            } else {
+                alert('Not enough coins to hire a miner!');
+            }
+        });
+
+        // Add miner to list
+        function addMinerToList() {
+            const minerDiv = document.createElement('div');
+            minerDiv.textContent = `Miner ${miners} is mining crystals...`;
+            minersList.appendChild(minerDiv);
+        }
+
+        // Generate crystal
+        setInterval(() => {
+            if (miners > 0) {
+                crystal += miners;
+                lastUpdate = Date.now();
+                updateDisplay();
+            }
+        }, 1000);
+
+        // Initial display
+        updateDisplay();
+        for (let i = 0; i < miners; i++) {
+            addMinerToList();
+        }
+    </script>
+</body>
+</html>

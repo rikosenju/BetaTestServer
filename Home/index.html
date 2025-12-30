@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Life - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="nav-menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="../About/index.html">About</a></li>
+            <li><a href="../Services/index.html">Services</a></li>
+            <li><a href="../Chats/index.html">Chats</a></li>
+            <li><a href="../Resources/index.html">Resources</a></li>
+            <li><a href="../Resources/Inventory/index.html">Inventory</a></li>
+            <li><a href="../Resources/Trade/index.html">Trade</a></li>
+            <li><a href="../Login&Create/index.html">Log Out</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h1>Welcome to Eco Life</h1>
+        <p>Discover sustainable living solutions and make a positive impact on our planet. Join us in creating a greener future for generations to come.</p>
+
+        <p>Game Title: Eco Life: Economy Life <br>
+<br>
+        Dive into the immersive world of Eco Life: Economy Life, where the balance of nature and economy is in your hands. <br>
+        In this resource-gathering and grinding adventure, you must harvest materials, build, and craft to create a thriving society. <br>
+        Start small, expand into a bustling town with farms, workshops, and trade routes. <br>
+        Gather resources, upgrade tools, and invest in technologies to improve lives. <br>
+        Complete quests, trade, and contribute to the economy for unique items and upgrades.<br>
+<br>
+        Balance growth with sustainability—your actions affect the environment. <br>
+        Will you prioritize growth or preserve the ecosystem? The choice is yours.<br>
+<br>
+        Get ready to live, trade, and thrive in Eco Life: Economy Life—where every decision shapes your world.</p>
+    </div>
+
+    <div class="annoucement">
+        <marquee behavior="scroll" direction="left">🌿 Join our Eco Life community today and start your journey towards a sustainable lifestyle! 🌍</marquee>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

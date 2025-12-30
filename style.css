@@ -1,0 +1,57 @@
+/* Apply background image to the body */
+body {
+    background-image: url('first.jpg');
+    background-size: cover;        /* Make the background cover the entire screen */
+    background-position: center;   /* Center the background */
+    background-repeat: no-repeat;  /* Prevent repeating the image */
+    height: 100vh;                 /* Full height of the viewport */
+    margin: 0;
+    display: flex;
+    justify-content: center;       /* Center content horizontally */
+    align-items: center;           /* Center content vertically */
+    color: white;                  /* White text for visibility on the background */
+    font-family: 'Arial', sans-serif; /* Set a nice font */
+}
+
+/* Center the content box */
+.content {
+    text-align: center;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  /* Light shadow for a 3D effect */
+    
+    /* Glassy effect */
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+    backdrop-filter: blur(10px);     /* Apply blur effect to background */
+    -webkit-backdrop-filter: blur(10px);  /* For Safari */
+    border: 2px solid rgba(255, 255, 255, 0.2);  /* Light border to enhance glassy look */
+}
+
+/* Styling for the h1 (heading) */
+h1 {
+    font-size: 3rem;             /* Large font size for the title */
+    margin-bottom: 20px;         /* Space below the heading */
+}
+
+/* Styling for the paragraph (text) */
+p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;         /* Space below the paragraph */
+}
+
+/* Styling for the button */
+button {
+    background-color: #4CAF50;    /* Green background color */
+    color: white;                 /* White text */
+    font-size: 1.2rem;            /* Larger font size for readability */
+    padding: 15px 30px;           /* Add padding around the text */
+    border: none;                 /* Remove default button border */
+    border-radius: 5px;           /* Round the button corners */
+    cursor: pointer;              /* Pointer cursor on hover */
+    transition: background-color 0.3s ease;  /* Smooth transition for hover effect */
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #45a049;    /* Darker green when hovered */
+}
